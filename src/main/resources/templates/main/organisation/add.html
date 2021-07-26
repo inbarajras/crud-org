@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+  margin-top: 8px;
+}
+hr.dashed {
+  border-top: 3px dashed #bbb;
+}
+.btn {
+  border: 1px solid black;
+  background-color: white;
+  color: blue;
+  font-size: 16px;
+  margin-top: 8px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+</style>
+
+<body>
+
+	<div class="container">
+	<h1>CRUD Of Organisation</h1>
+	<hr class="dashed">
+		<form th:action="@{/saveOrg}" th:object="${organisation}" method="POST">
+		<h3>Register Organisation</h3>
+		<input type="text" placeholder="Organisation Name" th:field="${organisation.orgName}"/>
+		<button type="submit">Register</button>
+		</form>
+		
+		<form th:action="@{/saveOrg}" th:object="${organisation}" method="POST">
+		<h3>Update Organisation</h3>
+		<input type="number" placeholder="Organisation ID" th:field="${organisation.orgId}"/>
+		<input type="text" placeholder="Organisation Name" th:field="${organisation.orgName}"/>
+		<button type="submit">Update</button>
+		</form>
+		
+		<form th:action="@{/deleteOrg}" th:object="${organisation}" method="DELETE">
+		<h3>Delete Organisation</h3>
+		<input type="number" placeholder="Organisation ID" th:field="${organisation.orgId}"/>
+		<button type="submit">Delete</button>
+		</form>
+		<div class="container">
+		<form th:action="@{/getOrg}" th:object="${organisation}" method="GET">
+		<table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>Organisation Name</th>
+					</tr>
+				</thead>		
+				<tbody>
+					<tr th:each="org : ${orgs}">
+						<td th:text="${org.orgId}"/>
+						<td th:text="${org.orgName}"/>
+					</tr>
+				</tbody>
+		</table>
+		<button class="btn" type="submit">Load Organisation</button>
+		</div>
+		</form>
+		<hr class="dashed">
+		<form th:action="@{/saveEmp}" th:object="${employee}" method="POST">
+		<h3>Register Employee</h3>
+		<input type="text" placeholder="Employee First Name" th:field="${employee.firstName}"/>
+		<input type="text" placeholder="Employee Last Name" th:field="${employee.lastName}"/>
+		<input type="text" placeholder="Employee Mail Id" th:field="${employee.mailId}"/>
+		<!-- <input type="text" placeholder="Employee Org" th:field="${employee.firstName}"/> -->
+		<button type="submit">Register</button>
+		</form>
+		
+		<form th:action="@{/saveEmp}" th:object="${employee}" method="POST">
+		<h3>Update Employee</h3>
+		<input type="text" placeholder="Employee First Name" th:field="${employee.firstName}"/>
+		<input type="text" placeholder="Employee Last Name" th:field="${employee.lastName}"/>
+		<input type="text" placeholder="Employee Mail Id" th:field="${employee.mailId}"/>
+		<!-- <input type="text" placeholder="Employee Org" th:field="${employee.firstName}"/> -->
+		<button type="submit">Update</button>
+		</form>
+		
+		<form th:action="@{/deleteEmp}" th:object="${employee}" method="DELETE">
+		<h3>Delete Employee</h3>
+		<input type="number" placeholder="Employee ID" th:field="${employee.employeeId}"/>
+		<button type="submit">Delete</button>
+		</form>
+		
+		<div class="container">
+		<form th:action="@{/getEmp}" th:object="${employee}" method="GET">
+		<table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>Employee Name</th>
+					</tr>
+				</thead>		
+				<tbody>
+					<tr th:each="employee : ${employees}">
+						<td th:text="${employee.employeeId}"/>
+						<td th:text="${employee.firstName}"/>
+					</tr>
+				</tbody>
+		</table>
+		<button class="btn" type="submit">Load Employee</button>
+		</div>
+		</form>
+		<hr class="dashed">
+		<form th:action="@{/saveProject}" th:object="${project}" method="POST">
+		<h3>Add Project</h3>
+		<input type="text" placeholder="Project Name" th:field="${project.name}"/>
+		<input type="text" placeholder="Project Status" th:field="${project.stage}"/>
+		<input type="text" placeholder="Project Description" th:field="${project.description}"/>
+		<button type="submit">Add</button>
+		</form>
+		
+		<form th:action="@{/saveProject}" th:object="${project}" method="POST">
+		<h3>Update Project</h3>
+		<input type="text" placeholder="Project Name" th:field="${project.name}"/>
+		<input type="text" placeholder="Project Status" th:field="${project.stage}"/>
+		<input type="text" placeholder="Project Description" th:field="${project.description}"/>
+		<button type="submit">Update</button>
+		</form>
+		
+		<form th:action="@{/deleteProj}" th:object="${project}" method="DELETE">
+		<h3>Delete Project</h3>
+		<input type="number" placeholder="Project ID" th:field="${project.projectId}"/>
+		<button type="submit">Delete</button>
+		</form>
+		
+		<form th:action="@{/getProjects}" th:object="${projects}" method="GET">
+		<div>
+		<table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>Project Name</th>
+					</tr>
+				</thead>		
+				<tbody>
+					<tr th:each="project : ${projects}">
+						<td th:text="${project.projectId}"/>
+						<td th:text="${project.name}"/>
+					</tr>
+				</tbody>
+		</table>
+		</div>
+		<div>
+		<button class="btn" type="submit">Load Projects</button>
+		</div>
+		</form>
+	<hr class="dashed">
+	<hr class="dashed">
+	
+
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}">
+	</div>
+	
+</body>
+
+</html>
